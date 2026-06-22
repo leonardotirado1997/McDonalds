@@ -15,34 +15,97 @@ import type { RootStackParamList } from "./HomeScreen";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Menu'>
 
-const combos = [
+type Product = {
+    id: string;
+    name: string;
+    description: string;
+    price: string;
+    image: number;
+}
+
+const combos: Product[] = [
     {
-        id: '1',
+        id: 'combo-1',
         name: 'McOferta Média Big Mac Duplo',
         description: 'Quatro hambúrgueres (100% carne bovina), alface americana...',
         price: 'R$ 39,90',
         image: require('../images/combo-big-mac-duplo.png'),
     },
     {
-        id: '2',
+        id: 'combo-2',
         name: 'Novo Brabo Melt Onion Rings',
         description: 'Dois hambúrgueres de carne 100% bovina, méquinese, a exclu...',
         price: 'R$ 41,50',
         image: require('../images/combo-brabo-melt-onion-rings.png'),
     },
     {
-        id: '3',
+        id: 'combo-3',
         name: 'McCrispy Chicken Elite',
         description: 'Composto por pão tipo brioche com batata, molho Honey&Fire, ...',
         price: 'R$ 39,90',
         image: require('../images/combo-mcrispy-elite.png'),
     },
     {
-        id: '4',
+        id: 'combo-4',
         name: 'Duplo Cheddar McMelt',
         description: 'Dois hambúgueres (100% carne bovina), molho lácteo com queij...',
         price: 'R$ 36,20',
         image: require('../images/combo-duplo-cheddar-mcmelt.png'),
+    },
+];
+
+const lanches: Product[] = [
+    {
+        id: 'lanche-1',
+        name: 'Big Mac',
+        description: 'Quatro hambúrgueres (100% carne bovina), alface americana...',
+        price: 'R$ 39,90',
+        image: require('../images/lanche-big-mac.png'),
+    },
+    {
+        id: 'lanche-2',
+        name: 'Duplo Quarterão',
+        description: 'Dois hambúrgueres de carne 100% bovina, méquinese, a exclu...',
+        price: 'R$ 41,50',
+        image: require('../images/lanche-duplo-quarterao.png')
+    },
+    {
+        id: 'lanche-3',
+        name: 'McMelt',
+        description: 'Composto por pão tipo brioche com batata, molho Honey&Fire, ...',
+        price: 'R$ 39,90',
+        image: require('../images/lanche-mcmelt.png'),
+    },
+    {
+        id: 'lanche-4',
+        name: 'McNífico Bacon',
+        description: 'Dois hambúrgueres (100% carne bovina), molho lácteo com queij...',
+        price: 'R$ 36,20',
+        image: require('../images/lanche-mcnifico-bacon.png')
+    },
+];
+
+const fritas: Product[] = [
+    {
+        id: 'fritas-1',
+        name: 'Fritas Grande',
+        description: 'Batatas fritas crocantes e sequinhas. Vem bastante!',
+        price: 'R$ 10,90',
+        image: require('../images/fritas-grande.png'),
+    },
+    {
+        id: 'fritas-2',
+        name: 'Fritas Média',
+        description: 'Batatas fritas crocantes e sequinhas. Vem bastante!',
+        price: 'R$ 9,90',
+        image: require('../images/fritas-media.png'),
+    },
+    {
+        id: 'fritas-3',
+        name: 'Fritas Pequena',
+        description: 'Batatas fritas crocantes e sequinhas. Vem bastante!',
+        price: 'R$ 5,90',
+        image: require('../images/fritas-pequena.png'),
     },
 ];
 
