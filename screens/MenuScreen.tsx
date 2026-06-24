@@ -109,10 +109,51 @@ const fritas: Product[] = [
     },
 ];
 
+const bebidas: Product[] = [
+    {
+        id: 'bebida-1',
+        name: 'Coca-Cola',
+        description: 'Coca-Cola gelada para acompanhar seu lanche.',
+        price: 'R$ 5,90',
+        image: require('../images/coca-cola.png'),
+    },
+    {
+        id: 'bebida-2',
+        name: 'Fanta Laranja',
+        description: 'Fanta Laranja gelada para acompanhar seu lanche.',
+        price: 'R$5,90',
+        image: require('../images/fanta-laranja.png'),
+    },
+    {
+        id: 'bebida-3',
+        name: 'Agua Mineral',
+        description: 'Água mineral sem gás para acompanhar seu lanche.',
+        price: 'R$5,90',
+        image: require('../images/agua.png'),
+    },
+]
+
 const categories = ['Combos', 'Lanches', 'Fritas', 'Bebidas'];
 
+function getProdutos(categoriaSelecionada: string): Product[] {
+    switch (categoriaSelecionada) {
+        case 'Combos':
+            return combos;
+        case 'Lanches':
+            return lanches;
+        case 'Fritas':
+            return fritas;
+        case 'Bebidas':
+            return bebidas;
+        default:
+            return combos;
+    }
+}
+
 export default function MenuScreen({ navigation }: Props) {
-    const [activeCategory, setActiveCategory] = useState<string>('Combos');
+    const [categoriaSelecionada, setCategoriaSelecionada] = useState<string>('Combos');
+
+    const produtosDaCategoria = getProdutos(categoriaSelecionada);
     return (
         <View style={styles.container}>
             <StatusBar barStyle={"light-content"} backgroundColor={"#000000"} />
@@ -167,12 +208,12 @@ export default function MenuScreen({ navigation }: Props) {
                         contentContainerStyle={styles.categoriesRow}
                     >
                         {categories.map((category) => {
-                            const isActive = category === activeCategory;
+                            const isActive = category === categoriaSelecionada;
                             return (
                                 <TouchableOpacity
                                     key={category}
                                     activeOpacity={0.8}
-                                    onPress={() => setActiveCategory(category)}
+                                    onPress={() => setCategoriaSelecionada(category)}
                                     style={[
                                         styles.categoryPill,
                                         isActive && styles.categoryPillActives
@@ -190,10 +231,10 @@ export default function MenuScreen({ navigation }: Props) {
                             );
                         })}
                     </ScrollView>
-                    <Text style={styles.sectionTitle}>Combos</Text>
-                    {combos.map((combo, index) => (
+                    <Text style={styles.sectionTitle}>{categoriaSelecionada}</Text>
+                    {produtosDaCategoria.map((produto, index) => (
                         <TouchableOpacity
-                            key={combo.id}
+                            key={produto.id}
                             style={[
                                 styles.productRow,
                                 index > 0 && styles.productRowDivider,
@@ -204,14 +245,14 @@ export default function MenuScreen({ navigation }: Props) {
                             }}
                         >
                             <View style={styles.productInfo}>
-                                <Text style={styles.productName}>{combo.name}</Text>
+                                <Text style={styles.productName}>{produto.name}</Text>
                                 <Text style={styles.productDescription} numberOfLines={2}>
-                                    {combo.description}
+                                    {produto.description}
                                 </Text>
-                                <Text style={styles.productPrice}>{combo.price}</Text>
+                                <Text style={styles.productPrice}>{produto.price}</Text>
                             </View>
                             <Image
-                                source={combo.image}
+                                source={produto.image}
                                 style={styles.productImage}
                                 resizeMode="contain"
                             />
@@ -312,16 +353,18 @@ const styles = StyleSheet.create({
     },
     categoriesRow: {
         flexDirection: 'row',
+        alignItems: 'center',
         gap: 10,
         paddingVertical: 18,
         paddingRight: 12,
     },
     categoryPill: {
+        height: 36,
         paddingHorizontal: 18,
-        paddingVertical: 9,
-        borderRadius: 22,
-        backgroundColor: '#F2F2F2'
-
+        borderRadius: 18,
+        backgroundColor: '#F2F2F2',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     categoryPillActives: {
         backgroundColor: '#FFC72C'
